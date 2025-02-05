@@ -14,6 +14,14 @@ class Matriz {
 
 	/*
 	
+		Deconstructor
+
+	*/
+
+	~Matriz();
+
+	/*
+	
 		Constructor por defecto
 	
 	*/
@@ -48,6 +56,34 @@ class Matriz {
 
   Matriz& operator= (const Matriz &m);
 
+/*
+
+	operadores varios
+
+*/
+
+  Matriz operator+ (const Matriz &m);
+
+  Matriz operator- (const Matriz &m);
+
+  Matriz operator* (const double escalar);
+
+  Matriz operator* (const Matriz &m);
+
+
+  /*
+  
+	devuelve true si es simetrica
+
+  */
+
+ 	bool esSimetrica();
+
+	double obtenerMaximo();
+	double obtenerMinimo();
+
+
+	Matriz calcularTraspuesta();
 
 /* Permite rellenar todos los elementos de la matriz del objeto actual preguntando al usuario 
 	   Parámetro: Ninguno

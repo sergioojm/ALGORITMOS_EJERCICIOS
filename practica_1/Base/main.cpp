@@ -92,6 +92,7 @@ int main()
 	case 'T':
 	  cout<<"C=At"<<endl;
 	  c=a.calcularTraspuesta();
+	  c.mostrarMatriz();
 	  break;
 	case 'F':
 	  cout<<"FIN"<<endl;

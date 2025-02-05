@@ -2,14 +2,25 @@
 #include <iostream>
 #include <math.h>
 #include <stdlib.h>
-#define assertdomjudge(x) if (!(x)){std::cout << "ERROR" << std:endl;exit(0);}
+#define assertdomjudge(x) if (!(x)){std::cout << "ERROR" << std::endl;exit(0);}
 
 
 /*
 
     --------------  Constructores  ---------------
 
+    y deconstructor
 */
+
+Matriz::~Matriz()
+{
+  for (int i = 0; i < this->n_filas; i++)
+  {
+    delete[] this->matriz[i];
+  }
+
+  delete[] this->matriz;
+}
 
 Matriz::Matriz ()
 {
@@ -86,6 +97,131 @@ Matriz &Matriz::operator=(const Matriz &m)
   }
 
   return (*this);
+}
+
+Matriz Matriz::operator+ (const Matriz &m)
+{
+  Matriz *resultMatrix = new Matriz(this->n_filas, this->n_columnas);
+
+  for (int i = 0; i < this->n_filas; i++)
+  {
+    for (int j = 0; j < this->n_columnas; j++)
+    {
+      resultMatrix->matriz[i][j] = this->matriz[i][j] + m.matriz[i][j];
+    }
+  }
+
+  return (*resultMatrix);
+}
+
+Matriz Matriz::operator- (const Matriz &m)
+{
+  Matriz *resultMatrix = new Matriz(this->n_filas, this->n_columnas);
+
+  for (int i = 0; i < this->n_filas; i++)
+  {
+    for (int j = 0; j < this->n_columnas; j++)
+    {
+      resultMatrix->matriz[i][j] = this->matriz[i][j] - m.matriz[i][j];
+    }
+  }
+
+  return (*resultMatrix);
+}
+
+Matriz Matriz::operator* (const double escalar)
+{
+   for (int i = 0; i < this->n_filas; i++)
+  {
+    for (int j = 0; j < this->n_columnas; j++)
+    {
+      this->matriz[i][j] *= escalar;
+    }
+  }
+
+  return (*this);
+}
+
+// es simetrica
+bool Matriz::esSimetrica()
+{
+  bool result = true;
+
+  //assertdomjudge(this->n_filas != this->n_columnas);
+
+  if (this->n_filas != this->n_columnas)
+  {
+    return false;
+  }
+
+
+  for (int i = 0; i < this->n_filas; i++)
+  {
+    for (int j = 0; j < this->n_columnas; j++)
+    {
+      if (this->matriz[i][j] != this->matriz[j][i])
+      {
+        result = false;
+      }
+    }
+  }
+
+  return result;
+}
+
+	double Matriz::obtenerMaximo()
+  {
+
+    double result = this->matriz[0][0];
+
+    for (int i = 0; i < this->n_filas; i++)
+    {
+      for (int j = 0; j < this->n_columnas; j++)
+      {
+        if (this->matriz[i][j] > result)
+        {
+          result = this->matriz[i][j];
+        }
+      }
+    }
+
+    return result;
+  }
+
+
+	double Matriz::obtenerMinimo()
+  {
+    double result = this->matriz[0][0];
+
+    for (int i = 0; i < this->n_filas; i++)
+    {
+      for (int j = 0; j < this->n_columnas; j++)
+      {
+        if (this->matriz[i][j] < result)
+        {
+          result = this->matriz[i][j];
+        }
+      }
+    }
+
+    return result;
+  }
+
+Matriz Matriz::calcularTraspuesta()
+{
+
+  Matriz *transposedMatrix = new Matriz(this->n_columnas, this->n_filas);
+
+  for (int i = 0; i < this->n_filas; i++)
+  {
+    for (int j = 0; j < this->n_columnas; j++)
+    {
+      transposedMatrix->matriz[j][i] = this->matriz[i][j];
+    }
+  }
+
+
+  return (*transposedMatrix);
 }
 
 // Leer matriz
