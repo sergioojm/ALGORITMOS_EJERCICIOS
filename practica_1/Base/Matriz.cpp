@@ -150,14 +150,15 @@ Matriz &Matriz::operator* (const double escalar)
 
 Matriz &Matriz::operator* (const Matriz &m)
 {
-  assertdomjudge(this->n_columnas == m.n_filas);
+  //assertdomjudge(this->n_columnas == m.n_filas);
+  Matriz *resultMatrix = NULL;
 
-  // if (this->n_columnas != m.n_filas)
-  // {
-  //   return (*resultMatrix);
-  // }
+  if (this->n_columnas != m.n_filas)
+  {
+    return (*resultMatrix);
+  }
 
-  Matriz *resultMatrix = new Matriz(this->n_filas, m.n_columnas);
+  resultMatrix = new Matriz(this->n_filas, m.n_columnas);
 
   for (int i = 0; i < this->n_filas; i++)
   {
