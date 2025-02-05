@@ -99,8 +99,11 @@ Matriz &Matriz::operator=(const Matriz &m)
   return (*this);
 }
 
-Matriz Matriz::operator+ (const Matriz &m)
+Matriz &Matriz::operator+ (const Matriz &m)
 {
+
+  assertdomjudge(this->n_columnas == m.n_columnas && this->n_filas == m.n_filas);
+
   Matriz *resultMatrix = new Matriz(this->n_filas, this->n_columnas);
 
   for (int i = 0; i < this->n_filas; i++)
@@ -114,8 +117,11 @@ Matriz Matriz::operator+ (const Matriz &m)
   return (*resultMatrix);
 }
 
-Matriz Matriz::operator- (const Matriz &m)
+Matriz &Matriz::operator- (const Matriz &m)
 {
+
+  assertdomjudge(this->n_columnas == m.n_columnas && this->n_filas == m.n_filas);
+
   Matriz *resultMatrix = new Matriz(this->n_filas, this->n_columnas);
 
   for (int i = 0; i < this->n_filas; i++)
@@ -129,7 +135,7 @@ Matriz Matriz::operator- (const Matriz &m)
   return (*resultMatrix);
 }
 
-Matriz Matriz::operator* (const double escalar)
+Matriz &Matriz::operator* (const double escalar)
 {
   for (int i = 0; i < this->n_filas; i++)
   {
@@ -142,7 +148,7 @@ Matriz Matriz::operator* (const double escalar)
   return (*this);
 }
 
-Matriz Matriz::operator* (const Matriz &m)
+Matriz &Matriz::operator* (const Matriz &m)
 {
   assertdomjudge(this->n_columnas == m.n_filas);
 

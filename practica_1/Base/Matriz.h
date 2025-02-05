@@ -62,13 +62,13 @@ class Matriz {
 
 */
 
-  Matriz operator+ (const Matriz &m);
+  Matriz& operator+ (const Matriz &m);
 
-  Matriz operator- (const Matriz &m);
+  Matriz& operator- (const Matriz &m);
 
-  Matriz operator* (const double escalar);
+  Matriz& operator* (const double escalar);
 
-  Matriz operator* (const Matriz &m);
+  Matriz& operator* (const Matriz &m);
 
 
   /*
