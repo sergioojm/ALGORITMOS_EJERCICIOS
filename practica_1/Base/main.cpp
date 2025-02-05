@@ -67,8 +67,8 @@ int main()
 	  cout<<"C=A*val"<<endl;
 	  break;
 	case 'X':
-	  c=a*b;
-	  cout<<"C=AxB"<<endl;
+	  //c=a*b;
+	  //cout<<"C=AxB"<<endl;
 	  break;
 	case 'I':
 	  cout<<"Imprimir C"<<endl;
@@ -92,7 +92,7 @@ int main()
 	case 'T':
 	  cout<<"C=At"<<endl;
 	  c=a.calcularTraspuesta();
-	  c.mostrarMatriz();
+	  //c.mostrarMatriz();
 	  break;
 	case 'F':
 	  cout<<"FIN"<<endl;

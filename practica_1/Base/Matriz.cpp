@@ -142,6 +142,31 @@ Matriz Matriz::operator* (const double escalar)
   return (*this);
 }
 
+Matriz Matriz::operator* (const Matriz &m)
+{
+  assertdomjudge(this->n_columnas == m.n_filas);
+
+  // if (this->n_columnas != m.n_filas)
+  // {
+  //   return (*resultMatrix);
+  // }
+
+  Matriz *resultMatrix = new Matriz(this->n_filas, m.n_columnas);
+
+  for (int i = 0; i < this->n_filas; i++)
+  {
+    for (int j = 0; j < this->n_columnas; j++)
+    {
+      for (int k = 0 ; k < this->n_columnas; k++)
+      {
+
+      }
+    }
+  }
+
+  return (*resultMatrix);
+}
+
 // es simetrica
 bool Matriz::esSimetrica()
 {
