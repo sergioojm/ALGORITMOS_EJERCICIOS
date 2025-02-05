@@ -131,7 +131,7 @@ Matriz Matriz::operator- (const Matriz &m)
 
 Matriz Matriz::operator* (const double escalar)
 {
-   for (int i = 0; i < this->n_filas; i++)
+  for (int i = 0; i < this->n_filas; i++)
   {
     for (int j = 0; j < this->n_columnas; j++)
     {
@@ -155,11 +155,11 @@ Matriz Matriz::operator* (const Matriz &m)
 
   for (int i = 0; i < this->n_filas; i++)
   {
-    for (int j = 0; j < this->n_columnas; j++)
+    for (int j = 0; j < m.n_columnas; j++)
     {
-      for (int k = 0 ; k < this->n_columnas; k++)
+      for (int k = 0 ; k < this->n_filas; k++)
       {
-
+        resultMatrix->matriz[i][j] += this->matriz[i][k] * m.matriz[k][j];
       }
     }
   }
