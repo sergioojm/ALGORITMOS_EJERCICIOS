@@ -5,10 +5,23 @@ void ordenarSeleccion(int x[],int len)
 {
   for(int i=0;i<len;i++)
     {
-      /*Añadir código de ordenar mediante selección */
-      
+      int min = i;
+
+      for (int j = i + 1; j < len; j++)
+      {
+        if (x[j] < x[min])
+        {
+          min = j;
+        }
+      }
+      int temp = x[i];
+      x[i] = x[min];
+      x[min] = temp; 
+
       for(int k=0;k<len;k++)
-	cout<<x[k]<<" ";
+      {
+        cout<<x[k]<<" ";
+      } 
       cout<<endl;
     }  
 }

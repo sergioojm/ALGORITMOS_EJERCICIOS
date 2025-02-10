@@ -5,11 +5,23 @@ void ordenarInsercion(int x[],int len)
 {
   for(int i=1;i<len;i++)
     {
-      
+      int key = x[i];
+
+      int j = i - 1;
+
+      while (j >= 0 && x[j] > key)
+      {
+        x[j + 1] = x[j];
+        j--;
+      }
+      x[j + 1] = key;
+   
       /*Añadir código de ordenación mediante inserción*/
       
       for(int k=0;k<len;k++)
-	cout<<x[k]<<" ";
+      {
+        cout<<x[k]<<" ";
+      }
       cout<<endl;
     }  
 }

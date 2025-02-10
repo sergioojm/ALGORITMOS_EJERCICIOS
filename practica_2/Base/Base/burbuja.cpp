@@ -4,16 +4,26 @@ using namespace std;
 void ordenarBurbuja(int x[],int len)
 {
   for(int i=1;i<len;i++)
+  {
+
+    /*Añadir código de ordenación usando algoritmo de burbuja*/
+    for (int j = 0; j < len - i; j++)
     {
+      if (x[j] > x[j + 1])
+      {
+        int temp = x[j];
+        x[j] = x[j+1];
+        x[j+1] = temp;
+      }
+    }
 
-      
-      /*Añadir código de ordenación usando algoritmo de burbuja*/
-      
 
-      for(int k=0;k<len;k++)
-	cout<<x[k]<<" ";
-      cout<<endl;
-    }  
+    for(int k=0;k<len;k++)
+    {
+      cout<<x[k]<<" ";
+    }
+    cout<<endl;
+  }  
 }
 
 
@@ -23,6 +33,8 @@ int main()
  cin>>n;
  int *x=new int[n];
  for(int i=0;i<n;i++)
-   cin>>x[i];
+ {
+  cin>>x[i];
+ }
  ordenarBurbuja(x,n);
 }
