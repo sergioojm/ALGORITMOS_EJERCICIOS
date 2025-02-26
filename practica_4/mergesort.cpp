@@ -10,8 +10,10 @@ void  combinar (int a[ ] , int len_a , int b[ ] , int len_b , int c[ ])
 void ordenarMergeSort (int x[], int len)
 {
   int temp[len];
-  if /*caso básico */
+  if () /*caso básico */
+  {
     return;
+  } 
   else
     {
       /*Ordenar dos mitades */
@@ -20,10 +22,10 @@ void ordenarMergeSort (int x[], int len)
 
       /*Copiar del array temporal al array resultado */
       for (int k = 0; k < len; k++)
-	{
-	  x[k] = temp[k];
-	  cout<<x[k]<<" ";
-	}
+      {
+        x[k] = temp[k];
+        cout<<x[k]<<" ";
+      }
       cout<<endl;
     }
 }
