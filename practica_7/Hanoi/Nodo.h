@@ -6,9 +6,9 @@ class Nodo
   Nodo *siguiente;
   
   Nodo(int v,Nodo *sig=NULL)
-    {
-      valor=v;
-      siguiente=sig;
-    }
+  {
+    valor=v;
+    siguiente=sig;
+  }
 };
 

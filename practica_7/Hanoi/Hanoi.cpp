@@ -21,10 +21,10 @@ int main()
   for(int i=n;i>0;i--)
     A->apilar(i);
 
-  Hanoi(n,A,C,B);
+ // Hanoi(n,A,C,B);
   
-  for(int i=0;i<n;i++)
-    C->desapilar();
+  //for(int i=0;i<n;i++)
+    //C->desapilar();
 
   return 0;
   
