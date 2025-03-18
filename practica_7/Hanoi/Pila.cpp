@@ -1,5 +1,7 @@
 #include"Pila.h"
+#define assertdomjudge(x) if(!(x)){std::cout<<"ERROR"<<std::endl;exit(0);}
 
+using namespace std;
 
 Pila::Pila(string name)
 {
@@ -23,31 +25,42 @@ void Pila::apilar(int num)
   }
  
   Nodo *actual = this->cima;
+  Nodo *newCima = new Nodo(num, actual);
+  this->cima = newCima;
 
-  while(actual->siguiente != nullptr)
+  if (this->cima == nullptr)
   {
-    actual = actual->siguiente;
+    cout << "cima es null" << endl;
   }
 
-  if (!actual->siguiente)
-  {
-    actual->siguiente = new Nodo(num, nullptr);
-  }
-
-  // actual->valor = num;
-  // actual->siguiente = nullptr;
+  
+  // Nodo *palWhile = this->cima;
+  // while( palWhile->siguiente != nullptr )
+  // {
+  //   cout << "Nodo con valor " << palWhile->valor << endl;
+  //   palWhile = palWhile->siguiente;
+  // }
 
 }
   
 int Pila::desapilar()
 {    
+  assertdomjudge(this->cima != nullptr);
 
-  cout << "Desapilando disco " << 0 << " del poste " << this->name << endl;
+  int valor = this->cima->valor;
 
+  cout << "Desapilando disco " << valor << " del poste " << this->name << endl;
+
+  Nodo *actual = this->cima;
+  this->cima = actual->siguiente;
+
+  free(actual);
+
+  return valor;
 }
 
 bool Pila::estaVacia()
 {
-
+  return this->cima == nullptr;
 }
 

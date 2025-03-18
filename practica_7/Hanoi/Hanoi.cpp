@@ -6,7 +6,20 @@ using namespace std;
 void Hanoi(int n,Pila *origen,Pila *destino,Pila *temporal) 
 {
 
+  if (n == 1)
+  {
+    destino->apilar(origen->desapilar());
+    return;
+  } 
+  else
+  {
+    Hanoi(n - 1, origen, temporal, destino);
+    destino->apilar(origen->desapilar());
+    Hanoi(n - 1, temporal, destino, origen);
+  }
+
 }
+
 
 
 int main()
@@ -18,13 +31,15 @@ int main()
   int n;
   cin>>n;
 
+  assertdomjudge(n > 0);
+
   for(int i=n;i>0;i--)
     A->apilar(i);
 
- // Hanoi(n,A,C,B);
+ Hanoi(n,A,C,B);
   
-  //for(int i=0;i<n;i++)
-    //C->desapilar();
+  for(int i=0;i<n;i++)
+    C->desapilar();
 
   return 0;
   
