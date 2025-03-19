@@ -11,4 +11,5 @@ public:
   void cerrarCaja(int n);  
   int atenderUsuario(int n);
   bool cajaVacia(int n);
+
 };
