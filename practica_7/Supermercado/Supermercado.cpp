@@ -20,23 +20,37 @@ void Supermercado::nuevoUsuario(int n, int id)
 
 void Supermercado::cerrarCaja(int n)
 {
-    int continuar = -2;
+    int userId = -1;
     int cajasVisitada = 0;
+    int lastCajaVisited = -1;
+    int salir = 0;
 
-    // cambiar a do while
-    while(continuar = this->cajas[n].desencolar() != -1)
+    do
     {
-        cout << continuar;
-        if (!this->cajaVacia(cajasVisitada) && continuar != -2 && continuar != -1)
+        userId = this->cajas[n].desencolar();
+       
+        if (userId != -1)
         {
-            cout << "Encolado en caja " << cajasVisitada << " el numero " << continuar;
-            this->cajas[cajasVisitada].encolar(continuar);
+            do
+            {
+                salir = 0;
+
+                if (!this->cajaVacia(cajasVisitada) && cajasVisitada != n && lastCajaVisited < cajasVisitada)
+                {
+                    cout << "Encolado en caja " << cajasVisitada << " el numero " << userId << endl;
+                    this->cajas[cajasVisitada].encolar(userId);
+                    lastCajaVisited++;
+                    salir = 1;
+                }
+    
+                cajasVisitada++;
+                if (cajasVisitada >= this->n_cajas) cajasVisitada = 0;
+                if (lastCajaVisited >= this->n_cajas) lastCajaVisited = -1;
+
+            } while(!salir);
         }
-        cajasVisitada++;
 
-        if (cajasVisitada >= this->n_cajas) cajasVisitada = 0;
-    }
-
+    } while (userId != -1);
 }
 
 int Supermercado::atenderUsuario(int n)
