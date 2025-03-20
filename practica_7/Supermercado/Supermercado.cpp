@@ -31,23 +31,26 @@ void Supermercado::cerrarCaja(int n)
        
         if (userId != -1)
         {
-            do
-            {
+            //do
+            //{
                 salir = 0;
 
-                if (!this->cajaVacia(cajasVisitada) && cajasVisitada != n && lastCajaVisited < cajasVisitada)
-                {
-                    cout << "Encolado en caja " << cajasVisitada << " el numero " << userId << endl;
-                    this->cajas[cajasVisitada].encolar(userId);
-                    lastCajaVisited++;
-                    salir = 1;
-                }
-    
-                cajasVisitada++;
-                if (cajasVisitada >= this->n_cajas) cajasVisitada = 0;
-                if (lastCajaVisited >= this->n_cajas) lastCajaVisited = -1;
+            if (!this->cajaVacia(cajasVisitada) && cajasVisitada != n)
+            {
+                cout << "Encolado en caja " << cajasVisitada << " el numero " << userId << endl;
+                this->cajas[cajasVisitada].encolar(userId);
+                //lastCajaVisited = cajasVisitada;
+                //salir = 1;
 
-            } while(!salir);
+                // si la cajavisitada es la misma que cierra
+                // entonces añadirlo a la siguiente caja, si existe
+            }
+
+            cajasVisitada++;
+            if (cajasVisitada >= this->n_cajas) cajasVisitada = 0;
+            //if (lastCajaVisited >= this->n_cajas) lastCajaVisited = -1;
+
+            //} while(!salir);
         }
 
     } while (userId != -1);
