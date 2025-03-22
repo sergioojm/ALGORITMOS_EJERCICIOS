@@ -29,10 +29,12 @@ int main()
       cout<<disparo<<endl;
     }while(disparo!="BANG");
 
-  for(int i=0;i<n_recamaras;i++)
-    pistola.eliminar(0);
-   
   
+  for(int i=0;i<n_recamaras;i++)
+  {
+    pistola.eliminar(0);
+  } 
+ 
   return 0;
   
 }
