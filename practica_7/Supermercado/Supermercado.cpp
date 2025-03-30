@@ -29,7 +29,6 @@ void Supermercado::cerrarCaja(int n)
        
         if (userId != -1)
         {
-
             int salir = 0;
 
             while (cajasVisitada < this->n_cajas && !salir)
@@ -48,6 +47,8 @@ void Supermercado::cerrarCaja(int n)
 
     } while (userId != -1);
 }
+
+
 
 int Supermercado::atenderUsuario(int n)
 {
