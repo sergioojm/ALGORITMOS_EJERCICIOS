@@ -7,7 +7,7 @@ using namespace std;
 Supermercado::Supermercado(int n)
 {
     this->n_cajas = n;
-    this->cajas = (Cola*) malloc(sizeof(Cola) * n);
+    this->cajas = (ColaPrioridad*) malloc(sizeof(ColaPrioridad) * n);
 }
 
 void Supermercado::nuevoUsuario(int n, int id)
@@ -20,32 +20,17 @@ void Supermercado::nuevoUsuario(int n, int id)
 
 void Supermercado::cerrarCaja(int n)
 {
-    int userId = -1;
-    int cajasVisitada = 0;
+    int i = 0;
 
-    do
+    while(!this->cajaVacia(n) && i != this->n_cajas)
     {
-        userId = this->cajas[n].desencolar();
-       
-        if (userId != -1)
+        if(i != n && !cajaVacia(i))
         {
-            int salir = 0;
-
-            while (cajasVisitada < this->n_cajas && !salir)
-            {
-                if (!this->cajaVacia(cajasVisitada) && cajasVisitada != n)
-                {
-                    //cout << "Encolado en caja " << cajasVisitada << " el numero " << userId << endl;
-                    this->cajas[cajasVisitada].encolar(userId);
-                    salir = 1;
-                }
-
-                cajasVisitada++;
-                if (cajasVisitada >= this->n_cajas) cajasVisitada = 0;
-            }
+            this->nuevoUsuario(i, this->atenderUsuario(n));
         }
-
-    } while (userId != -1);
+        
+        i = (i + 1) % this->n_cajas;
+    }
 }
 
 

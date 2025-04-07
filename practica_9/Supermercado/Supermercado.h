@@ -1,9 +1,9 @@
-#include"Cola.h"
+#include"ColaPrioridad.h"
 
 class Supermercado
 {
 private:
-  Cola *cajas;
+  ColaPrioridad *cajas;
   int n_cajas;
 public:
   Supermercado(int n);
@@ -11,5 +11,4 @@ public:
   void cerrarCaja(int n);  
   int atenderUsuario(int n);
   bool cajaVacia(int n);
-
 };
