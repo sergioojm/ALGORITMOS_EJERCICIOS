@@ -1,26 +1,26 @@
 #pragma once
 
-#include "SolucionParcial.h" // Estructura que guarda el "x" e "y" de una solución parcial
+#include "SolucionParcial.h" // Estructura que guarda el "x" e "y" de una soluciï¿½n parcial
 
-// Clase que representa una función polinómica de cualquier grado y de una variable independiente
+// Clase que representa una funciï¿½n polinï¿½mica de cualquier grado y de una variable independiente
 class Polinomio
 {
- private:
- 	int n; // Grado del polinomio. Tiene que ser >= 0
-	float *coeficientes; // Array de coeficientes del polinomio (tamaño: n+1). Primero los coeficientes de los sumandos de grado menor.
+	private:
+		int n; // Grado del polinomio. Tiene que ser >= 0
+		float *coeficientes; // Array de coeficientes del polinomio (tamaï¿½o: n+1). Primero los coeficientes de los sumandos de grado menor.
 
-	// Función para obtener un número aleatorio que siga una distribución normal estandar (media 0 y desviación 1).
-	// Retorno: número aleatorio siguiendo una distribución normal entre [-6, +6]
-	// Complejidad temporal y espacial: O(1)
-	float obtenerAleatorioNormalEstandar();
+		// Funciï¿½n para obtener un nï¿½mero aleatorio que siga una distribuciï¿½n normal estandar (media 0 y desviaciï¿½n 1).
+		// Retorno: nï¿½mero aleatorio siguiendo una distribuciï¿½n normal entre [-6, +6]
+		// Complejidad temporal y espacial: O(1)
+		float obtenerAleatorioNormalEstandar();
 
-	float obtenerRaizRecursivo(SolucionParcial solucionParcialInicial);
+		float obtenerRaizRecursivo(SolucionParcial solucionParcialInicial);
 
-public:
+	public:
 
-	Polinomio(int n, float *coeficientes);
-	float evaluar (float x);
-	float obtenerRaiz();
-	~Polinomio();
+		Polinomio(int n, float *coeficientes);
+		float evaluar (float x);
+		float obtenerRaiz();
+		~Polinomio();
 };
 
