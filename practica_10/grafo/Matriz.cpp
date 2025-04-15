@@ -251,33 +251,37 @@ Matriz Matriz::calcularTraspuesta()
   return (*transposedMatrix);
 }
 
-void Matriz::rellenarArista(const int fila, const int col)
+void Matriz::rellenarArista(const int fila, const int col, const int color)
 {
   assertdomjudge(fila >= 0 && fila < this->n_filas); 
   assertdomjudge(col >= 0 && col < this->n_columnas);
 
 
-
-  this->matriz[fila][col] = 1;
+  this->matriz[col][fila] = color;
+  this->matriz[fila][col] = color;
 }
 
-bool Matriz::comprobarAtleti() // rojiBlanco
+bool Matriz::esBipartito() // rojiBlanco
 {
   bool result = true;
-  int numeroElementos = 0;
+  int numElementos = 0;
 
   for (int i = 0; i < n_filas; i++)
   {
-    for (int j = 0; j < n_columnas; j++)
+    for (int color = 1; color <= 2; color++)
     {
-      if (this->matriz[i][j] == 1)
+      for (int j = 0; j < n_columnas; j++)
       {
-        numeroElementos++;
+        if (this->matriz[i][j] == color)
+        {
+          numElementos++;
+          //cout << "mismo color" << color << " en " << i << " " << j << " num" << numElementos << endl;
+        }
+
+        if (numElementos >= 2) result = false;
       }
-        
-      if (numeroElementos > 1) result = false;
+      numElementos = 0;
     }
-    numeroElementos = 0;
   }
 
   return result;

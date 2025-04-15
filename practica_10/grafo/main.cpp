@@ -28,11 +28,21 @@ int main(void)
             cin >> aristaInit;
             cin >> aristaFinn;
 
-            adyaciencia->rellenarArista(aristaInit, aristaFinn);
+            int color = 0;
+            if (i % 2 == 0) color = 1;
+            else color = 2;
+
+            // 1 = rojo
+            // 2 = blanco
+
+            adyaciencia->rellenarArista(aristaInit, aristaFinn, color);
         }
         
         // comprobar si alguna arista conecta mas de una vez el mismo nodo
-        if (adyaciencia->comprobarAtleti())
+
+        adyaciencia->mostrarMatriz();
+
+        if (adyaciencia->esBipartito())
         {
             cout << "SI" << endl;
         }

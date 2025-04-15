@@ -96,8 +96,8 @@ class Matriz {
 */
   
   void rellenarManual();
-  void rellenarArista(const int fila, const int col);
-  bool comprobarAtleti(); // rojiBlanco
+  void rellenarArista(const int fila, const int col, const int color);
+  bool esBipartito(); // rojiBlanco
 
 
 /* Permite rellenar todos los elementos de la matriz del objeto actual de forma aleatoria 
