@@ -1,5 +1,6 @@
 #include "Matriz.h"
 #include <iostream>
+#define assertdomjudge(x) if (!(x)){std::cout << "ERROR" << std::endl;exit(0);}
 
 using namespace std;
 
@@ -14,6 +15,8 @@ int main(void)
     {
         cin >> numVertices;
 
+        assertdomjudge(numVertices>=1 && numVertices<=100);
+        
         if (numVertices == 0) break;
 
         cin >> numAristas;

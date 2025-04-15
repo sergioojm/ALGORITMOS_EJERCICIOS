@@ -255,6 +255,7 @@ void Matriz::rellenarArista(const int fila, const int col, const int color)
 {
   assertdomjudge(fila >= 0 && fila < this->n_filas); 
   assertdomjudge(col >= 0 && col < this->n_columnas);
+  assertdomjudge(fila != col);
 
 
   this->matriz[col][fila] = color;
