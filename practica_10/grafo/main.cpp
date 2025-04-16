@@ -1,4 +1,4 @@
-#include "Matriz.h"
+#include "Vertice.h"
 #include <iostream>
 #define assertdomjudge(x) if (!(x)){std::cout << "ERROR" << std::endl;exit(0);}
 
@@ -6,55 +6,97 @@ using namespace std;
 
 int main(void)
 {
-    Matriz *adyaciencia = nullptr;
+    Vertice *grafo = nullptr;
 
     int numVertices = 0;
     int numAristas  = 0;
+    int salir = false;
 
-    while(true)
+    while(!salir)
     {
         cin >> numVertices;
 
-        assertdomjudge(numVertices>=1 && numVertices<=100);
         
-        if (numVertices == 0) break;
-
-        cin >> numAristas;
-
-        adyaciencia = new Matriz(numVertices, numVertices);
-
-        for (int i = 0; i < numAristas; i++)
+        if (numVertices <= 0) 
         {
-            int aristaInit = 0;
-            int aristaFinn = 0;
-
-            cin >> aristaInit;
-            cin >> aristaFinn;
-
-            int color = 0;
-            if (i % 2 == 0) color = 1;
-            else color = 2;
-
-            // 1 = rojo
-            // 2 = blanco
-
-            adyaciencia->rellenarArista(aristaInit, aristaFinn, color);
-        }
-        
-        // comprobar si alguna arista conecta mas de una vez el mismo nodo
-
-        adyaciencia->mostrarMatriz();
-
-        if (adyaciencia->esBipartito())
-        {
-            cout << "SI" << endl;
+            salir = true;
         }
         else
         {
-            cout << "NO" << endl;
-        }
+            assertdomjudge(numVertices>=1 && numVertices<=100);
 
+            cin >> numAristas;
+    
+            grafo = new Vertice[numVertices];
+    
+            // crear grafo
+            for (int i = 0; i < numVertices; i++)
+            {
+
+                grafo[i].color = 0;
+                grafo[i].hijos = new Vertice[numVertices];
+            }
+    
+            // obtener aristas
+            for (int i = 0; i < numAristas; i++)
+            {
+                int aristaVerticePadre = 0;
+                int aristaVerticeHijo  = 0;
+    
+                cin >> aristaVerticePadre;
+                cin >> aristaVerticeHijo;
+    
+                assertdomjudge(aristaVerticePadre != aristaVerticeHijo);
+                assertdomjudge(aristaVerticePadre >= 0 && aristaVerticePadre < numVertices 
+                    && aristaVerticeHijo >= 0 && aristaVerticeHijo <= numVertices);
+                assertdomjudge(grafo[aristaVerticePadre].hijos[aristaVerticeHijo].color == 0 
+                    && grafo[aristaVerticeHijo].hijos[aristaVerticePadre].color == 0);
+                
+
+                int color = (aristaVerticePadre % 2 == 0) ? 1 : 2;
+                int colorHijo = (aristaVerticeHijo % 2 == 0) ? 1 : 2;
+
+    
+                grafo[aristaVerticePadre].color = color;
+                grafo[aristaVerticeHijo].color = colorHijo;
+    
+                grafo[aristaVerticePadre].hijos[aristaVerticeHijo].color = grafo[aristaVerticeHijo].color;
+                grafo[aristaVerticeHijo].hijos[aristaVerticePadre].color = grafo[aristaVerticePadre].color;
+            }
+            
+            // comprobar si alguna arista conecta mas de una vez el mismo nodo
+            bool result = true;
+           
+            //cout << "calculando" << endl;
+            for (int i = 0; i < numVertices; i++)
+            {
+                for (int j = 0; j < numVertices; j++)
+                {
+                    if (grafo[i].color == grafo[i].hijos[j].color)
+                    {
+                        // cout << i << " " << j << endl;
+                        // cout << "color padre " << grafo[i].color << " color hijo" <<  grafo[i].hijos[j].color << endl;
+                        result = false;
+                    }
+                }
+            }
+    
+            if (result)
+            {
+                cout << "SI" << endl;
+            }
+            else
+            {
+                cout << "NO" << endl;
+            }
+        }
     }
+      
+    for (int i = 0; i < numVertices; i++)
+    {
+        delete[] grafo->hijos;
+    }
+    delete[] grafo;
 
     return 0;
 }
