@@ -2,9 +2,9 @@
 
 using namespace std;
 
-void print(int num, int *nums)
+void print(int *nums)
 {	
-	for (int i = 0; i < num; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		cout << nums[i];
 	}
@@ -13,64 +13,56 @@ void print(int num, int *nums)
 
 int comprobar(int num, int *nums)
 {
-	int contador = 0;
+	int suma = 0;
 	
-	for (int i = 0; i < num; i++)
-	{
-		contador += nums[i];
-	}
-	
-	return contador == num;
-}
-
-void probar(int *numeros, int* exito, int numSumar)
-{
 	for (int i = 0; i < 4; i++)
 	{
-		if (numeros[i] == -1)
-		{
-			// 10 es el num de movimientos
-			for (int i = 0; i < 10; i++)
-			{
-				numeros[i] = i;
-				probar(numeros, exito, numSumar);
-				
-				if (comprobar(numSumar, numeros))
-				{
-					*(exito) = 1;
-				}
-				else
-				{
-					
-					
-					if (exito[0] != 1)
-					{
-						numeros[i] = -1;
-					}
-				}
-				
-				
-				if (exito[0] == 1)
-				{
-					print(numSumar, numeros);
-				}
-			}
-		}
+		suma += nums[i];
+		if (nums[i] == -1) suma = 0;
 	}
+	
+	return suma == num;
 }
-
-
 
 /*
 
-busco en mis numeros
+	pruebo
 
-si alguno es -1, probar los 10 numeros
+	miro mis 4 numeros
 
+	si alguno de mis numeros es -1, tengo q probar combinaciones
 
-
+			pruebo las 10 combinaciones que tengo posibles del 0 al 9
+				si alguna da que la suma es mi numero, entonces exito = 1
 
 */
+
+void probar(int *numeros, int numSumar, int pos)
+{
+	if (pos >= 5) return;
+
+	if (comprobar(numSumar, numeros))
+	{
+		print(numeros);
+		return;
+	}
+	
+	if (numeros[pos] == -1)
+	{
+		// 10 es el num de movimientos
+		for (int j = 0; j < 10; j++)
+		{
+			numeros[pos] = j;
+			probar(numeros, numSumar, pos + 1);
+		}
+		numeros[pos] = -1; // mantener las demas llamadas recursivas
+	}
+	else
+	{
+		probar(numeros, numSumar, pos + 1);
+	}
+}
+
 
 int main(void)
 {
@@ -84,7 +76,7 @@ int main(void)
 	
 	cin >> numSumar;
 	
-	probar(numeros, 0, numSumar);
+	probar(numeros, numSumar, 0);
 	
 	return 0;
 }

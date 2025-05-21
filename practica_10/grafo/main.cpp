@@ -11,6 +11,7 @@ int main(void)
     int numVertices = 0;
     int numAristas  = 0;
     int salir = false;
+    
 
     while(!salir)
     {
