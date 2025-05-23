@@ -4,29 +4,38 @@ using namespace std;
 
 #define MAX_TAM 9
 
-int testSudoku(int **sudoku, int testRow, int testCol)
+
+void printSudoku(int sudoku[MAX_TAM][MAX_TAM])
 {
-  // test row & col
   for (int i = 0; i < MAX_TAM; i++)
   {
     for (int j = 0; j < MAX_TAM; j++)
     {
-      // test de la fila
-      if (sudoku[testRow][i] == sudoku[testRow][j]) return 0;
-      // si no hay valor igual en la fila, tenemos que comprobar su columna
-
-      for (int ic = 0; i < MAX_TAM; ic++)
-      {
-        for (int jc = 0; j < MAX_TAM; jc++)
-        {
-          if (sudoku[ic][testCol] == sudoku[jc][testCol]) return 0;
-        }
-      }
+      cout << sudoku[i][j] << " ";
     }
+    cout << endl;
+  }
+}
+
+int testSudoku(int sudoku[MAX_TAM][MAX_TAM], int testRow, int testCol)
+{
+  int valor = sudoku[testRow][testCol];
+
+  if (valor == 0) return 0;
+
+  // test row & col
+  for (int i = 0; i < MAX_TAM; i++)
+  {
+    if (testCol != i && sudoku[testRow][i] == valor) return 0;
   }
 
-  // test 3x3 box
+  for (int i = 0; i < MAX_TAM; i++)
+  {
+    if (testRow != i && sudoku[i][testCol] == valor) return 0;
+  }
 
+
+  // test 3x3 box
   int boxRow = testRow - (testRow % 3);
   int boxCol = testCol - (testCol % 3);
 
@@ -34,17 +43,66 @@ int testSudoku(int **sudoku, int testRow, int testCol)
   {
     for (int j = boxCol; j < boxCol + 3; j++)
     {
-      if (sudoku[i][j] == sudoku[testRow][testCol]) return 0;
+      if (sudoku[i][j] == valor && (testRow != i || testCol != j)) return 0;
     }
   }
 
   return 1;
 }
 
-
-void backtrackingSudoku(int **sudoku, int row)
+bool sudokuCompleted(int sudoku[MAX_TAM][MAX_TAM])
 {
- 
+
+  for (int i = 0; i < MAX_TAM; i++)
+  {
+    for (int j = 0; j < MAX_TAM; j++)
+    {
+      if (sudoku[i][j] == 0 || testSudoku(sudoku, i, j) == 0) return false;
+    }
+  }
+
+  return true;
+}
+
+void backtrackingSudoku(int sudoku[MAX_TAM][MAX_TAM], int row, int col, int *exito)
+{
+
+  if (exito[0]) return;
+
+  if (row >= MAX_TAM) return;
+
+  if (col >= MAX_TAM)
+  {
+    col = 0;
+    backtrackingSudoku(sudoku, row+1, col, exito);
+    return;
+  }
+
+  if (sudokuCompleted(sudoku))
+  {
+    printSudoku(sudoku);
+    *exito = true;
+    return;
+  }
+
+  if (sudoku[row][col] != 0)
+  {
+    backtrackingSudoku(sudoku, row, col + 1, exito); 
+  }
+  else
+  {
+    for (int i = 1; i <= MAX_TAM; i++)
+    {
+      sudoku[row][col] = i;
+      if (testSudoku(sudoku, row, col))
+      {
+        backtrackingSudoku(sudoku, row, col + 1, exito);
+      }
+    }
+
+    sudoku[row][col] = 0;
+  }
+
 }
 
 
@@ -63,17 +121,8 @@ int main(void)
     {0, 0, 0, 0, 8, 0, 0, 7, 9}
     };
 
-    int **sudokuPtr = new int*[MAX_TAM];
-    for (int i = 0; i < MAX_TAM; i++)
-    {
-        sudokuPtr[i] = new int[MAX_TAM];
-        for (int j = 0; j < MAX_TAM; j++)
-        {
-            sudokuPtr[i][j] = sudoku[i][j];
-        }
-    }
-
-  backtrackingSudoku(sudokuPtr, 0);
+  int exito = false;
+  backtrackingSudoku(sudoku, 0, 0, &exito);
 
   return 0;
 }
